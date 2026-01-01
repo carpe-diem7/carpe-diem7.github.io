@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工资调研统计平台</title>
+    <!-- 引入Tailwind CSS，无需本地配置 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome图标，样式美观 -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- 自定义样式配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6', // 主色调：蓝色
+                        secondary: '#64748b', // 辅助色：深灰色
+                        accent: '#10b981', // 强调色：绿色
+                    },
+                    fontFamily: {
+                        inter: ['system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .card-shadow {
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            }
+            .hover-lift {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .hover-lift:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50 text-gray-800 min-h-screen">
+    <!-- 导航栏 -->
+    <header class="bg-white card-shadow sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-bar-chart text-primary text-2xl"></i>
+                <h1 class="text-xl md:text-2xl font-bold text-primary">工资调研统计平台</h1>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#overview" class="text-secondary hover:text-primary transition-colors">数据概览</a>
+                <a href="#charts" class="text-secondary hover:text-primary transition-colors">我的调研图</a>
+                <a href="#download" class="text-secondary hover:text-primary transition-colors">图片下载</a>
+            </div>
+            <!-- 移动端汉堡菜单 -->
+            <button class="md:hidden text-secondary text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 数据概览卡片（可自定义修改数据） -->
+        <section id="overview" class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 flex items-center">
+                <i class="fa fa-dashboard text-primary mr-3"></i>薪资调研核心数据
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 平均薪资卡片 -->
+                <div class="bg-white rounded-xl p-6 card-shadow hover-lift">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-secondary text-sm">平均年薪</p>
+                            <h3 class="text-2xl font-bold mt-1">¥15.8万</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-primary">
+                            <i class="fa fa-money text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-center text-sm">
+                        <span class="text-accent flex items-center">
+                            <i class="fa fa-arrow-up mr-1"></i>8.2%
+                        </span>
+                        <span class="text-secondary ml-2">较上年度</span>
+                    </div>
+                </div>
+
+                <!-- 薪资中位数卡片 -->
+                <div class="bg-white rounded-xl p-6 card-shadow hover-lift">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-secondary text-sm">薪资中位数</p>
+                            <h3 class="text-2xl font-bold mt-1">¥14.2万</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-accent">
+                            <i class="fa fa-balance-scale text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-center text-sm">
+                        <span class="text-accent flex items-center">
+                            <i class="fa fa-arrow-up mr-1"></i>6.5%
+                        </span>
+                        <span class="text-secondary ml-2">较上年度</span>
+                    </div>
+                </div>
+
+                <!-- 调研样本数卡片 -->
+                <div class="bg-white rounded-xl p-6 card-shadow hover-lift">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-secondary text-sm">调研样本数</p>
+                            <h3 class="text-2xl font-bold mt-1">2,856份</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                            <i class="fa fa-users text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-center text-sm">
+                        <span class="text-accent flex items-center">
+                            <i class="fa fa-arrow-up mr-1"></i>12.3%
+                        </span>
+                        <span class="text-secondary ml-2">样本覆盖率</span>
+                    </div>
+                </div>
+
+                <!-- 行业覆盖数卡片 -->
+                <div class="bg-white rounded-xl p-6 card-shadow hover-lift">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-secondary text-sm">覆盖行业数</p>
+                            <h3 class="text-2xl font-bold mt-1">32个</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
+                            <i class="fa fa-sitemap text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-center text-sm">
+                        <span class="text-accent flex items-center">
+                            <i class="fa fa-plus mr-1"></i>4个
+                        </span>
+                        <span class="text-secondary ml-2">新增覆盖</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 你的图片展示区域（已替你替换为 下载 (1).png 和 下载.png） -->
+        <section id="charts" class="mb-16">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 flex items-center">
+                <i class="fa fa-picture-o text-primary mr-3"></i>我的工资调研统计图片
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 第一张图片：已替换为 下载 (1).png -->
+                <div class="bg-white rounded-xl p-6 card-shadow hover-lift">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold">工资调研图1</h3>
+                        <div class="text-sm text-secondary">薪资统计可视化</div>
+                    </div>
+                    <div class="h-80 flex items-center justify-center overflow-hidden rounded-lg bg-gray-100">
+                        <img src="images/下载 (1).png" alt="工资调研统计图片1" class="w-full h-full object-contain">
+                    </div>
+                </div>
+
+                <!-- 第二张图片：已替换为 下载.png -->
+                <div class="bg-white rounded-xl p-6 card-shadow hover-lift">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold">工资调研图2</h3>
+                        <div class="text-sm text-secondary">薪资对比可视化</div>
+                    </div>
+                    <div class="h-80 flex items-center justify-center overflow-hidden rounded-lg bg-gray-100">
+                        <img src="images/下载.png" alt="工资调研统计图片2" class="w-full h-full object-contain">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 图片下载区域（已替你替换为 下载 (1).png 和 下载.png，保留下载功能） -->
+        <section id="download" class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 flex items-center">
+                <i class="fa fa-download text-primary mr-3"></i>调研图片下载
+            </h2>
+
+            <div class="bg-white rounded-xl p-8 card-shadow">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- 第一张图片下载：已替换为 下载 (1).png -->
+                    <div class="flex flex-col items-center p-4 border border-gray-100 rounded-lg hover:border-primary transition-colors">
+                        <div class="w-full h-48 mb-4 overflow-hidden rounded-lg bg-gray-100">
+                            <img id="salaryImg1" src="images/下载 (1).png" alt="工资调研图1" class="w-full h-full object-contain">
+                        </div>
+                        <h3 class="text-lg font-medium mb-2">工资调研图1</h3>
+                        <p class="text-secondary text-center text-sm mb-4">我的工资调研统计核心图片1</p>
+                        <button onclick="downloadSalaryImage('salaryImg1', '工资调研图1')" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg flex items-center transition-colors">
+                            <i class="fa fa-download mr-2"></i>下载图片
+                        </button>
+                    </div>
+
+                    <!-- 第二张图片下载：已替换为 下载.png -->
+                    <div class="flex flex-col items-center p-4 border border-gray-100 rounded-lg hover:border-primary transition-colors">
+                        <div class="w-full h-48 mb-4 overflow-hidden rounded-lg bg-gray-100">
+                            <img id="salaryImg2" src="images/下载.png" alt="工资调研图2" class="w-full h-full object-contain">
+                        </div>
+                        <h3 class="text-lg font-medium mb-2">工资调研图2</h3>
+                        <p class="text-secondary text-center text-sm mb-4">我的工资调研统计核心图片2</p>
+                        <button onclick="downloadSalaryImage('salaryImg2', '工资调研图2')" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg flex items-center transition-colors">
+                            <i class="fa fa-download mr-2"></i>下载图片
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <i class="fa fa-bar-chart text-primary text-2xl mr-2"></i>
+                    <span class="text-xl font-bold">工资调研统计平台</span>
+                </div>
+                <div class="text-gray-400 text-sm">
+                    © 2025 工资调研统计 | 所有图片仅供个人使用
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 图片下载函数（无需修改，直接生效） -->
+    <script>
+        // 工资调研图片下载函数
+        function downloadSalaryImage(imageId, fileName) {
+            // 获取图片元素
+            const image = document.getElementById(imageId);
+            // 创建下载链接
+            const downloadLink = document.createElement('a');
+            // 设置下载文件名（带日期，方便区分）
+            const currentDate = new Date().toLocaleDateString().replace(/\//g, '-');
+            downloadLink.download = `${fileName}_${currentDate}.png`;
+            // 绑定图片地址
+            downloadLink.href = image.src;
+            // 触发下载
+            downloadLink.click();
+        }
+
+        // 页面加载提示
+        console.log("工资调研统计网页加载完成，可正常使用！");
+    </script>
+</body>
+</html>
