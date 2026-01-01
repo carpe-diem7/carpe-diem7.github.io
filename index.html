@@ -15,7 +15,7 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#3b82f6', // 主色调：蓝色
+                        primary: '#3b82f6', // 主色调：蓝色（视觉清爽）
                         secondary: '#64748b', // 辅助色：深灰色
                         accent: '#10b981', // 强调色：绿色
                     },
@@ -39,23 +39,32 @@
                 transform: translateY(-5px);
                 box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
             }
+            /* 电脑端图片卡片固定高度，保证排版整齐 */
+            .pc-card-height {
+                height: 380px;
+            }
+            /* 电脑端下载卡片固定高度 */
+            .pc-download-card-height {
+                height: 320px;
+            }
         }
     </style>
 </head>
 <body class="font-inter bg-gray-50 text-gray-800 min-h-screen">
-    <!-- 导航栏 -->
+    <!-- 导航栏（电脑端横向排布，手机端隐藏导航显示汉堡菜单） -->
     <header class="bg-white card-shadow sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-2">
                 <i class="fa fa-bar-chart text-primary text-2xl"></i>
                 <h1 class="text-xl md:text-2xl font-bold text-primary">工资调研统计平台</h1>
             </div>
+            <!-- 电脑端导航（md及以上显示） -->
             <div class="hidden md:flex items-center space-x-6">
                 <a href="#overview" class="text-secondary hover:text-primary transition-colors">数据概览</a>
                 <a href="#charts" class="text-secondary hover:text-primary transition-colors">我的调研图</a>
                 <a href="#download" class="text-secondary hover:text-primary transition-colors">图片下载</a>
             </div>
-            <!-- 移动端汉堡菜单 -->
+            <!-- 移动端汉堡菜单（仅小屏幕显示） -->
             <button class="md:hidden text-secondary text-xl">
                 <i class="fa fa-bars"></i>
             </button>
@@ -64,11 +73,12 @@
 
     <!-- 主要内容 -->
     <main class="container mx-auto px-4 py-8">
-        <!-- 数据概览卡片（可自定义修改数据） -->
-        <section id="overview" class="mb-12">
-            <h2 class="text-2xl md:text-3xl font-bold mb-6 flex items-center">
-                <i class="fa fa-dashboard text-primary mr-3"></i>薪资调研核心数据
+        <!-- 数据概览卡片（电脑端4列，手机端1列，优先电脑端美观） -->
+        <section id="overview" class="mb-16">
+            <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 flex items-center">
+                <i class="fa fa-dashboard text-primary mr-4 text-3xl"></i>薪资调研核心数据
             </h2>
+            <!-- 电脑端4列，平板2列，手机1列 -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- 平均薪资卡片 -->
                 <div class="bg-white rounded-xl p-6 card-shadow hover-lift">
@@ -148,65 +158,159 @@
             </div>
         </section>
 
-        <!-- 你的图片展示区域（已替你替换为 下载 (1).png 和 下载.png） -->
+        <!-- 6张图展示区域（电脑端3列，平板2列，手机1列，优先电脑端美观） -->
         <section id="charts" class="mb-16">
-            <h2 class="text-2xl md:text-3xl font-bold mb-6 flex items-center">
-                <i class="fa fa-picture-o text-primary mr-3"></i>我的工资调研统计图片
+            <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 flex items-center">
+                <i class="fa fa-picture-o text-primary mr-4 text-3xl"></i>我的工资调研统计图片
             </h2>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- 第一张图片：已替换为 下载 (1).png -->
-                <div class="bg-white rounded-xl p-6 card-shadow hover-lift">
-                    <div class="flex justify-between items-center mb-4">
+            <!-- 核心布局：lg(电脑)3列，md(平板)2列，sm(手机)1列，gap控制间距保证美观 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 原有图1：下载 (1).png（电脑端固定高度，排版整齐） -->
+                <div class="bg-white rounded-xl p-6 card-shadow hover-lift pc-card-height flex flex-col">
+                    <div class="flex justify-between items-center mb-4 flex-shrink-0">
                         <h3 class="text-lg font-semibold">工资调研图1</h3>
                         <div class="text-sm text-secondary">薪资统计可视化</div>
                     </div>
-                    <div class="h-80 flex items-center justify-center overflow-hidden rounded-lg bg-gray-100">
+                    <div class="h-full flex items-center justify-center overflow-hidden rounded-lg bg-gray-100 flex-grow">
                         <img src="images/下载 (1).png" alt="工资调研统计图片1" class="w-full h-full object-contain">
                     </div>
                 </div>
 
-                <!-- 第二张图片：已替换为 下载.png -->
-                <div class="bg-white rounded-xl p-6 card-shadow hover-lift">
-                    <div class="flex justify-between items-center mb-4">
+                <!-- 原有图2：下载.png -->
+                <div class="bg-white rounded-xl p-6 card-shadow hover-lift pc-card-height flex flex-col">
+                    <div class="flex justify-between items-center mb-4 flex-shrink-0">
                         <h3 class="text-lg font-semibold">工资调研图2</h3>
                         <div class="text-sm text-secondary">薪资对比可视化</div>
                     </div>
-                    <div class="h-80 flex items-center justify-center overflow-hidden rounded-lg bg-gray-100">
+                    <div class="h-full flex items-center justify-center overflow-hidden rounded-lg bg-gray-100 flex-grow">
                         <img src="images/下载.png" alt="工资调研统计图片2" class="w-full h-full object-contain">
+                    </div>
+                </div>
+
+                <!-- 新增图3：1.png -->
+                <div class="bg-white rounded-xl p-6 card-shadow hover-lift pc-card-height flex flex-col">
+                    <div class="flex justify-between items-center mb-4 flex-shrink-0">
+                        <h3 class="text-lg font-semibold">工资调研图3</h3>
+                        <div class="text-sm text-secondary">薪资趋势可视化</div>
+                    </div>
+                    <div class="h-full flex items-center justify-center overflow-hidden rounded-lg bg-gray-100 flex-grow">
+                        <img src="images/1.png" alt="工资调研统计图片3" class="w-full h-full object-contain">
+                    </div>
+                </div>
+
+                <!-- 新增图4：2.png -->
+                <div class="bg-white rounded-xl p-6 card-shadow hover-lift pc-card-height flex flex-col">
+                    <div class="flex justify-between items-center mb-4 flex-shrink-0">
+                        <h3 class="text-lg font-semibold">工资调研图4</h3>
+                        <div class="text-sm text-secondary">薪资分布可视化</div>
+                    </div>
+                    <div class="h-full flex items-center justify-center overflow-hidden rounded-lg bg-gray-100 flex-grow">
+                        <img src="images/2.png" alt="工资调研统计图片4" class="w-full h-full object-contain">
+                    </div>
+                </div>
+
+                <!-- 新增图5：3.png -->
+                <div class="bg-white rounded-xl p-6 card-shadow hover-lift pc-card-height flex flex-col">
+                    <div class="flex justify-between items-center mb-4 flex-shrink-0">
+                        <h3 class="text-lg font-semibold">工资调研图5</h3>
+                        <div class="text-sm text-secondary">薪资构成可视化</div>
+                    </div>
+                    <div class="h-full flex items-center justify-center overflow-hidden rounded-lg bg-gray-100 flex-grow">
+                        <img src="images/3.png" alt="工资调研统计图片5" class="w-full h-full object-contain">
+                    </div>
+                </div>
+
+                <!-- 新增图6：4.png -->
+                <div class="bg-white rounded-xl p-6 card-shadow hover-lift pc-card-height flex flex-col">
+                    <div class="flex justify-between items-center mb-4 flex-shrink-0">
+                        <h3 class="text-lg font-semibold">工资调研图6</h3>
+                        <div class="text-sm text-secondary">薪资层级可视化</div>
+                    </div>
+                    <div class="h-full flex items-center justify-center overflow-hidden rounded-lg bg-gray-100 flex-grow">
+                        <img src="images/4.png" alt="工资调研统计图片6" class="w-full h-full object-contain">
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 图片下载区域（已替你替换为 下载 (1).png 和 下载.png，保留下载功能） -->
-        <section id="download" class="mb-12">
-            <h2 class="text-2xl md:text-3xl font-bold mb-6 flex items-center">
-                <i class="fa fa-download text-primary mr-3"></i>调研图片下载
+        <!-- 6张图下载区域（和展示区布局一致，电脑端3列更美观） -->
+        <section id="download" class="mb-16">
+            <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 flex items-center">
+                <i class="fa fa-download text-primary mr-4 text-3xl"></i>调研图片下载
             </h2>
 
             <div class="bg-white rounded-xl p-8 card-shadow">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- 第一张图片下载：已替换为 下载 (1).png -->
-                    <div class="flex flex-col items-center p-4 border border-gray-100 rounded-lg hover:border-primary transition-colors">
-                        <div class="w-full h-48 mb-4 overflow-hidden rounded-lg bg-gray-100">
+                <!-- 电脑端3列，平板2列，手机1列，和展示区呼应 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 图1下载：下载 (1).png -->
+                    <div class="flex flex-col items-center p-4 border border-gray-100 rounded-lg hover:border-primary transition-colors pc-download-card-height">
+                        <div class="w-full h-48 mb-4 overflow-hidden rounded-lg bg-gray-100 flex-shrink-0">
                             <img id="salaryImg1" src="images/下载 (1).png" alt="工资调研图1" class="w-full h-full object-contain">
                         </div>
                         <h3 class="text-lg font-medium mb-2">工资调研图1</h3>
-                        <p class="text-secondary text-center text-sm mb-4">我的工资调研统计核心图片1</p>
-                        <button onclick="downloadSalaryImage('salaryImg1', '工资调研图1')" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg flex items-center transition-colors">
+                        <p class="text-secondary text-center text-sm mb-4">薪资统计核心图片1</p>
+                        <button onclick="downloadSalaryImage('salaryImg1', '工资调研图1')" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg flex items-center transition-colors flex-shrink-0">
                             <i class="fa fa-download mr-2"></i>下载图片
                         </button>
                     </div>
 
-                    <!-- 第二张图片下载：已替换为 下载.png -->
-                    <div class="flex flex-col items-center p-4 border border-gray-100 rounded-lg hover:border-primary transition-colors">
-                        <div class="w-full h-48 mb-4 overflow-hidden rounded-lg bg-gray-100">
+                    <!-- 图2下载：下载.png -->
+                    <div class="flex flex-col items-center p-4 border border-gray-100 rounded-lg hover:border-primary transition-colors pc-download-card-height">
+                        <div class="w-full h-48 mb-4 overflow-hidden rounded-lg bg-gray-100 flex-shrink-0">
                             <img id="salaryImg2" src="images/下载.png" alt="工资调研图2" class="w-full h-full object-contain">
                         </div>
                         <h3 class="text-lg font-medium mb-2">工资调研图2</h3>
-                        <p class="text-secondary text-center text-sm mb-4">我的工资调研统计核心图片2</p>
-                        <button onclick="downloadSalaryImage('salaryImg2', '工资调研图2')" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg flex items-center transition-colors">
+                        <p class="text-secondary text-center text-sm mb-4">薪资对比核心图片2</p>
+                        <button onclick="downloadSalaryImage('salaryImg2', '工资调研图2')" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg flex items-center transition-colors flex-shrink-0">
+                            <i class="fa fa-download mr-2"></i>下载图片
+                        </button>
+                    </div>
+
+                    <!-- 图3下载：1.png -->
+                    <div class="flex flex-col items-center p-4 border border-gray-100 rounded-lg hover:border-primary transition-colors pc-download-card-height">
+                        <div class="w-full h-48 mb-4 overflow-hidden rounded-lg bg-gray-100 flex-shrink-0">
+                            <img id="salaryImg3" src="images/1.png" alt="工资调研图3" class="w-full h-full object-contain">
+                        </div>
+                        <h3 class="text-lg font-medium mb-2">工资调研图3</h3>
+                        <p class="text-secondary text-center text-sm mb-4">薪资趋势核心图片3</p>
+                        <button onclick="downloadSalaryImage('salaryImg3', '工资调研图3')" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg flex items-center transition-colors flex-shrink-0">
+                            <i class="fa fa-download mr-2"></i>下载图片
+                        </button>
+                    </div>
+
+                    <!-- 图4下载：2.png -->
+                    <div class="flex flex-col items-center p-4 border border-gray-100 rounded-lg hover:border-primary transition-colors pc-download-card-height">
+                        <div class="w-full h-48 mb-4 overflow-hidden rounded-lg bg-gray-100 flex-shrink-0">
+                            <img id="salaryImg4" src="images/2.png" alt="工资调研图4" class="w-full h-full object-contain">
+                        </div>
+                        <h3 class="text-lg font-medium mb-2">工资调研图4</h3>
+                        <p class="text-secondary text-center text-sm mb-4">薪资分布核心图片4</p>
+                        <button onclick="downloadSalaryImage('salaryImg4', '工资调研图4')" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg flex items-center transition-colors flex-shrink-0">
+                            <i class="fa fa-download mr-2"></i>下载图片
+                        </button>
+                    </div>
+
+                    <!-- 图5下载：3.png -->
+                    <div class="flex flex-col items-center p-4 border border-gray-100 rounded-lg hover:border-primary transition-colors pc-download-card-height">
+                        <div class="w-full h-48 mb-4 overflow-hidden rounded-lg bg-gray-100 flex-shrink-0">
+                            <img id="salaryImg5" src="images/3.png" alt="工资调研图5" class="w-full h-full object-contain">
+                        </div>
+                        <h3 class="text-lg font-medium mb-2">工资调研图5</h3>
+                        <p class="text-secondary text-center text-sm mb-4">薪资构成核心图片5</p>
+                        <button onclick="downloadSalaryImage('salaryImg5', '工资调研图5')" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg flex items-center transition-colors flex-shrink-0">
+                            <i class="fa fa-download mr-2"></i>下载图片
+                        </button>
+                    </div>
+
+                    <!-- 图6下载：4.png -->
+                    <div class="flex flex-col items-center p-4 border border-gray-100 rounded-lg hover:border-primary transition-colors pc-download-card-height">
+                        <div class="w-full h-48 mb-4 overflow-hidden rounded-lg bg-gray-100 flex-shrink-0">
+                            <img id="salaryImg6" src="images/4.png" alt="工资调研图6" class="w-full h-full object-contain">
+                        </div>
+                        <h3 class="text-lg font-medium mb-2">工资调研图6</h3>
+                        <p class="text-secondary text-center text-sm mb-4">薪资层级核心图片6</p>
+                        <button onclick="downloadSalaryImage('salaryImg6', '工资调研图6')" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg flex items-center transition-colors flex-shrink-0">
                             <i class="fa fa-download mr-2"></i>下载图片
                         </button>
                     </div>
@@ -215,7 +319,7 @@
         </section>
     </main>
 
-    <!-- 页脚 -->
+    <!-- 页脚（电脑端横向排布，手机端纵向排布） -->
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center">
@@ -230,25 +334,19 @@
         </div>
     </footer>
 
-    <!-- 图片下载函数（无需修改，直接生效） -->
+    <!-- 图片下载函数（支持6张图，无需修改） -->
     <script>
         // 工资调研图片下载函数
         function downloadSalaryImage(imageId, fileName) {
-            // 获取图片元素
             const image = document.getElementById(imageId);
-            // 创建下载链接
             const downloadLink = document.createElement('a');
-            // 设置下载文件名（带日期，方便区分）
             const currentDate = new Date().toLocaleDateString().replace(/\//g, '-');
             downloadLink.download = `${fileName}_${currentDate}.png`;
-            // 绑定图片地址
             downloadLink.href = image.src;
-            // 触发下载
             downloadLink.click();
         }
 
-        // 页面加载提示
-        console.log("工资调研统计网页加载完成，可正常使用！");
+        console.log("工资调研统计网页加载完成，电脑端排版最优，手机端自适应兼容！");
     </script>
 </body>
 </html>
